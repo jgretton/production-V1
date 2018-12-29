@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::prefix('dashboard')->group( function() {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/products', 'DashboardController@products')->name('products');
+    Route::resource('/orders', 'OrdersController');
 });
+
+
