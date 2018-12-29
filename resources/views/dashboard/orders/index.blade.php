@@ -35,8 +35,8 @@
                             <td>{{$order->material}}</td>
                             <td>{{$order->programNumber}}</td>
                             <td>{{$order->cycleTime}} Seconds</td>
+                            <td><a href="{{route('orders.edit', $order->id)}}"><button class="btn btn-primary">Edit</button></a> </td>
                             <td>
-                                <a href="{{route('orders.edit', $order->id)}}"><button class="btn btn-secondary"> Edit</button></a>
                                 <form method="POST" action="/dashboard/orders/{{$order->id}}">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
@@ -59,6 +59,5 @@
                       </nav>
             </div>
     </div>
-
 
 @endsection
