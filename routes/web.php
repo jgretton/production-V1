@@ -19,6 +19,7 @@ Route::prefix('dashboard')->group( function() {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::get('/products', 'DashboardController@products')->name('products');
     Route::resource('/orders', 'OrdersController');
+    Route::resource('/parts', 'PartsController');
 });
 
 

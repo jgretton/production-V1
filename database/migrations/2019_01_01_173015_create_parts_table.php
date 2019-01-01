@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreatePartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('Orders', function (Blueprint $table) {
+        Schema::create('parts', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
 
-            $table->unsignedinteger('part_id');
-            $table->string('orderNumber');
-            $table->unsignedInteger('quantity');
-            $table->boolean('complete')->default(false);
+            
+            $table->string('material');
+            $table->integer('cycleTime');
+            $table->string('programNumber');
+            $table->string('drawingNumber');
+
         });
     }
 
@@ -31,6 +33,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Orders');
+        Schema::dropIfExists('parts');
     }
 }

@@ -17,16 +17,13 @@ class CreateJobsTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('partNumber');
-            $table->integer('orderNumber');
-            $table->string('material');
-            $table->string('programNumber');
-            $table->integer('cycleTime');
-            $table->integer('quantity'); 
+
             $table->integer('total_cycleTime');
             $table->integer('machine');
-            $table->boolean('active'); // To know if the job has been selected to be worked on.
-            $table->boolean('completed'); // To know if the job has been completed.
+            $table->boolean('active')->default(false); // To know if the job has been selected to be worked on.
+            $table->boolean('completed')->default(false); // To know if the job has been completed.
+
+            $table->unsignedInteger('order_id'); // to link Job to an order
 
         });
     }
