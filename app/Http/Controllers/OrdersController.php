@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Orders;
+use App\Parts;
 
 class OrdersController extends Controller
 {
@@ -20,10 +21,12 @@ class OrdersController extends Controller
     }
 
 
-    public function create()
+    public function create(Parts $part)
     {
         //
-        return view('dashboard.orders.create');
+        $part = Parts::orderby('id', 'desc')->paginate(10);
+
+        return view('dashboard.orders.create')->withPart($part);
     }
 
 
@@ -31,11 +34,8 @@ class OrdersController extends Controller
     {
 
         Orders::create(request()->validate([
-            'partNumber' => 'required',
             'orderNumber' => 'required',
-            'material' => 'required',
-            'programNumber' => 'required',
-            'cycleTime' => 'required'
+            'drawingNumber' => 'required'
             ]));
 
         return redirect('dashboard/orders');

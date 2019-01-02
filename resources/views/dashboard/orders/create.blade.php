@@ -32,29 +32,60 @@
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label for="partNumber">Part Number</label>
-                        <input type="text" class="form-control {{$errors->has('partNumber') ? 'is-invalid' : ''}}" name="partNumber"  value="{{old('partNumber')}}">
-                    </div>
-
-                    <div class="form-group">
                         <label for="orderNumber">Order Number</label>
                         <input type="text" class="form-control {{$errors->has('orderNumber') ? 'is-invalid' : ''}}" name="orderNumber" value="{{old('orderNumber')}}">
                     </div>
 
-                    <div class="form-group">
-                        <label for="material">Material</label>
-                        <input type="text" class="form-control {{$errors->has('material') ? 'is-invalid' : ''}}" name="material" value="{{old('material')}}">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="programNumber">Program Number</label>
-                        <input type="text" class="form-control {{$errors->has('programNumber') ? 'is-invalid' : ''}}" name="programNumber" value="{{old('programNumber')}}">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="cycleTime">Cycle Time</label>
-                        <input type="text" class="form-control {{$errors->has('cycleTime') ? 'is-invalid' : ''}}" name="cycleTime" value="{{old('cycleTime')}}">
-                    </div>
+
+                    <div class="card">
+                            <div class="card-body">
+                                <form >
+                                        <div class="form-group">
+                                                <label for="exampleInputEmail1">Choose Parts</label></br>
+                                                <label for="exampleInputEmail1">Search by Drawing Number</label>
+                                                <input type="text" class="form-control">
+                                              </div>
+                                </form>
+                            </div>
+                          </div>
+
+                    <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">Selected</th>
+                                <th scope="col">Drawing Number</th>
+                                <th scope="col">Material</th>
+                                <th scope="col">Program Number</th>
+                                <th scope="col">Cycle Time</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($part as $part)
+                                <tr>
+                                    <td><input type="checkbox" name="selected"></td>
+                                    <td>{{$part->drawingNumber}}</td>
+                                    <td>{{$part->material}}</td>
+                                    <td>{{$part->programNumber}}</td>
+                                    <td>{{$part->cycleTime}} Seconds</td>
+                                    <td><a href="{{route('parts.edit', $part->id)}}"><button class="btn btn-primary">Edit</button></a> </td>
+                                    <td>
+                                        <form method="POST" action="/dashboard/parts/{{$part->id}}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button class="btn btn-danger"> Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                              @endforeach
+        
+                            </tbody>
+                        </table>
+
+
+
+
+
 
                     <button class="btn btn-primary "type="submit"> Create</button>
 
